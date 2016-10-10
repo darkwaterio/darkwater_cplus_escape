@@ -1,7 +1,7 @@
 #define SERVO_MIN 1.250 /*mS*/
 #define SERVO_MAX 1.750 /*mS*/
 
-#include "darkwater/DW640.h"
+#include "darkwater/DWESCAPE.h"
 #include "darkwater/Util.h"
 #include <stdlib.h>
 
@@ -14,7 +14,7 @@ int main()
         return 1;
     }
 
-    DW640 dw;
+    DWESCAPE dw;
     dw.initialize();
     dw.setFrequency(50);
 

@@ -13,7 +13,7 @@ make
 ./AccelGyroMag
 */
 
-#include "darkwater/DW640.h"
+#include "darkwater/DWESCAPE.h"
 #include "darkwater/Util.h"
 #include <stdlib.h>
 //=============================================================================
@@ -24,7 +24,7 @@ int main()
         return 1;
     }
 	//-------------------------------------------------------------------------
-	DW640 dw;
+	DWESCAPE dw;
 	dw.initialize();
 
 	DW_Motor *dw1 = dw.getMotor(1);
