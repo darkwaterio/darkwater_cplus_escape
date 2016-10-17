@@ -98,12 +98,12 @@ int main(int argc, char *argv[])
     dw.initialize();
     dw.setFrequency(servoFrequency);
 
-    servos[0] = dw.getServo(1);
-    servos[1] = dw.getServo(2);
-    servos[2] = dw.getServo(3);
-    servos[3] = dw.getServo(4);
-    servos[4] = dw.getServo(5);
-    servos[5] = dw.getServo(6);
+    servos[0] = dw->getServo(1);
+    servos[1] = dw->getServo(2);
+    servos[2] = dw->getServo(3);
+    servos[3] = dw->getServo(4);
+    servos[4] = dw->getServo(5);
+    servos[5] = dw->getServo(6);
 
 	// GPIO setup
 	gpioCfgClock(samplingRate, PI_DEFAULT_CLK_PERIPHERAL, 0); /* last parameter is deprecated now */
