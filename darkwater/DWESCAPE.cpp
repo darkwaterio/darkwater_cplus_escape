@@ -46,7 +46,7 @@ bool DWESCAPE::initialize() {
     this->pwm = new PCA9685( this->devAddr );
     this->pwm->initialize();
     if (!testConnection() ) {
-    	printf("No 640 board found\n");
+    	printf("No ESCAPE board found\n");
     	return 0;		
     }
     // set the default frequency
@@ -267,15 +267,15 @@ void DW_Motor::setMotorSpeed(int16_t speed) {
 
 	// Speed deciphering for the two control modes
 	if( speed >= 1000 && speed < 1500 ) {
-		run( DW_REVERSE, map(speed, 1500, 1000, 0, 255 ) );
-		} else if( speed > 1500 && speed <= 2000 ) {	
-			run( DW_FORWARD, map(speed, 1500, 2000, 0, 255 ) );
+		run( DW_REVERSE, speed );
+		} else if( speed > 1500 && speed <= 2000 ) {
+			run( DW_FORWARD, speed );	
 			} else if( speed > 0 && speed <= 255 ) {
-				run( DW_FORWARD, speed );
+				run( DW_FORWARD, map(speed, 0, 255, 1500, 2000 ) );
 				} else if( speed < 0 && speed >= -255 ) {
-					run( DW_REVERSE, abs(speed) );
+					run( DW_REVERSE, map( abs(speed, 0, 255, 1500, 1000) );
 					} else if( speed == 0 || speed == 1500 ) {
-						run( DW_STOP, speed );
+						run( DW_STOP, 1500 );
 					}
 
 	
@@ -287,38 +287,34 @@ void DW_Motor::off(void) {
 }
 
 void DW_Motor::run( uint8_t control, uint16_t speed ) {
-	// get the mode
-	if( DWC->getMode() == DW_PHASE ) {
-		if( control == DW_FORWARD ) {
-				DWC->setPin( in2, 0 );
-				DWC->setPWM( in1, 0, speed * 16 );
-			} else if( control == DW_REVERSE ) {
-					DWC->setPin( in2, 1 );
-					DWC->setPWM( in1, 0, speed * 16 );
-				} else if( control == DW_STOP ) {
-					DWC->setPin( in2, 0 );
-					DWC->setPin( in1, 0 );
+
+	// The if statement isn't really needed - but it's there in case we want to add more functionality later
+	if( control == DW_FORWARD ) {
+		setPWMuS( speed );
+		} else if( control == DW_REVERSE ) {
+			setPWMuS( speed );
+			} else if( control == DW_STOP ) {
+				setPWMuS( speed );
 				}
-	} else {	// DW_ININ
-		if( control == DW_FORWARD ) {
-			DWC->setPin( in2, 0 );
-			DWC->setPWM( in1, 0, speed * 16 );
-			} else if( control == DW_REVERSE ) {
-				DWC->setPin( in1, 0 );
-				DWC->setPWM( in2, 0, speed * 16 );
-				} else if( control == DW_STOP ) {
-					DWC->setPin( in1, 1 );
-					DWC->setPin( in2, 1 );
-					} else if( control == DW_COAST ) {
-						DWC->setPin( in1, 0 );
-						DWC->setPin( in2, 0 );
-					}
-	}
+
 }
 
 uint16_t DW_Motor::map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t out_max)
 {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
+void DW_Motor::setPWMmS(float length_mS) {
+
+	DWC->setPWMmS( pin, length_mS ); // Servo 1 is on PWM 0
+
+}
+
+void DW_Motor::setPWMuS(float length_uS) {
+
+	DWC->setPWMuS( pin, length_uS ); // Servo 1 is on PWM 0
+	
+
 }
 
 /* Servo code */

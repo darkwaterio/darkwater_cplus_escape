@@ -61,6 +61,8 @@ class DW_Motor {
         void setMotorSpeed(int16_t speed);
         void off(void);
         void run(uint8_t control, uint16_t speed );
+        void setPWMmS(float length_mS);
+        void setPWMuS(float length_uS);
 
     private:
         uint8_t pin;
@@ -114,11 +116,6 @@ class DWESCAPE {
 
         DW_Motor *getMotor(uint8_t motor);
         DW_Servo *getServo(uint8_t servo);        
-
-        // void setStepperOff(uint8_t stepper);
-        // void setStepperSpeed(uint8_t stepper, uint16_t speed);
-        // void oneStep(uint8_t stepper, uint8_t direction, uint8_t style);
-        // void step(uint8_t stepper, uint16_t steps, uint8_t direction, uint8_t style = DW_SINGLE);
 
      private:
         uint8_t devAddr;
