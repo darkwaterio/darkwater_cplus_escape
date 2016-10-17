@@ -71,8 +71,14 @@ void ppmOnEdge(int gpio, int level, uint32_t tick)
 			currentChannel = 0;
 
 			// RC output
-			for (int i = 0; i < ppmChannelsNumber; i++)
+			for (int i = 0; i < ppmChannelsNumber; i++) {
+				// Because we aren't going to get exact readings as this may not be running with a RT kernel
+				// We need to add some sanity checks for values
+				if( channels[i] > 2000 ) channels[i] = 2000; // Set top value
+				if( channels[i] < 1000 ) channels[i] = 1000; // Set bottom value
+				//if( channels[i] < 1550 && channels[i] > 1450 ) channels[i] = 1500; // Add a dead band around center
 				servos[i]->setPWMuS( channels[i] );
+			}
 
 			// Console output
 			if (verboseOutputEnabled) {
