@@ -273,7 +273,7 @@ void DW_Motor::setMotorSpeed(int16_t speed) {
 			} else if( speed > 0 && speed <= 255 ) {
 				run( DW_FORWARD, map(speed, 0, 255, 1500, 2000 ) );
 				} else if( speed < 0 && speed >= -255 ) {
-					run( DW_REVERSE, map( abs(speed, 0, 255, 1500, 1000) );
+					run( DW_REVERSE, map( abs(speed), 0, 255, 1500, 1000) );
 					} else if( speed == 0 || speed == 1500 ) {
 						run( DW_STOP, 1500 );
 					}
