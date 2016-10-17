@@ -51,7 +51,7 @@ bool verboseOutputEnabled      = true;   // Output channels values to console
 using namespace DarkWater;
 
 DWESCAPE *dw;
-DW_SERVO *servos[6];
+DW_Servo *servos[6];
 
 float channels[8];
 
