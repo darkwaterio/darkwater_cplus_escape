@@ -42,7 +42,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 unsigned int samplingRate      = 1;      // 1 microsecond (can be 1,2,4,5,10)
 unsigned int ppmInputGpio      = 4;      // PPM input on Navio's 2.54 header
 unsigned int ppmSyncLength     = 4000;   // Length of PPM sync pause
-unsigned int ppmChannelsNumber = 8;      // Number of channels packed in PPM
+unsigned int ppmChannelsNumber = 6;      // Number of channels packed in PPM
 unsigned int servoFrequency    = 50;     // Servo control frequency
 bool verboseOutputEnabled      = true;   // Output channels values to console
 
@@ -53,7 +53,7 @@ using namespace DarkWater;
 DWESCAPE *dw;
 DW_Servo *servos[6];
 
-float channels[8];
+float channels[6];
 
 //============================== PPM decoder ===================================
 
