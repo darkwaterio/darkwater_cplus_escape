@@ -35,6 +35,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "darkwater/DWESCAPE.h"
 #include "darkwater/Util.h"
+#include <stdlib.h>
 
 //================================ Options =====================================
 
@@ -46,6 +47,8 @@ unsigned int servoFrequency    = 50;     // Servo control frequency
 bool verboseOutputEnabled      = true;   // Output channels values to console
 
 //============================ Objects & data ==================================
+
+using namespace DarkWater;
 
 DWESCAPE *dw;
 DW_SERVO *servos[6];
@@ -86,8 +89,6 @@ void ppmOnEdge(int gpio, int level, uint32_t tick)
 
 //================================== Main ======================================
 
-using namespace DarkWater;
-
 int main(int argc, char *argv[])
 {
     if (check_apm()) {
@@ -95,8 +96,8 @@ int main(int argc, char *argv[])
     }
     
     dw = new DWESCAPE();
-    dw.initialize();
-    dw.setFrequency(servoFrequency);
+    dw->initialize();
+    dw->setFrequency(servoFrequency);
 
     servos[0] = dw->getServo(1);
     servos[1] = dw->getServo(2);
