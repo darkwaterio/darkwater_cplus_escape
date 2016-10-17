@@ -62,7 +62,7 @@ int main()
     s6->off();
 
     printf("Start servo moves\n");
-    for( int a = 10; a >= 0; a-- ) {
+    for( int a = 5; a >= 0; a-- ) {
         printf("Step %d\n", a);
         s1->setPWMmS(SERVO_MIN);
         s2->setPWMmS(SERVO_MIN);
